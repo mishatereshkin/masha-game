@@ -4,130 +4,226 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Маша.exe 💖</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
 
   <style>
-    :root{
-      --pink:#ff2f5e;
-      --soft:#fff0f5;
-      --soft2:#ffe6ee;
+    :root {
+      --pink: #ff2f5e;
+      --soft: #fff0f5;
+      --soft2: #ffe6ee;
     }
-    *{box-sizing:border-box}
-
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;
-      background:linear-gradient(135deg,#ff9a9e,#fad0c4);
-      overflow:hidden;
-      -webkit-tap-highlight-color:transparent;
-    }
-
-    /* fullscreen layout */
-    .container{
-      position:fixed;
-      inset:0;
-      display:flex;
-      flex-direction:column;
-      padding:
-        calc(env(safe-area-inset-top) + 12px)
-        12px
-        calc(env(safe-area-inset-bottom) + 12px);
-      background:rgba(255,255,255,.96);
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-font-smoothing: antialiased;
     }
 
-    h1{
-      margin:0 0 4px;
-      color:var(--pink);
-      text-align:center;
-    }
-    .subtitle{
-      text-align:center;
-      font-size:14px;
-      color:#555;
-      margin-bottom:8px;
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      overflow: hidden;
+      height: 100vh;
+      touch-action: manipulation;
     }
 
-    .info{
-      display:flex;
-      justify-content:space-between;
-      font-weight:800;
-      color:var(--pink);
-      margin-bottom:6px;
+    .container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      padding: max(12px, env(safe-area-inset-top)) 
+               12px 
+               max(12px, env(safe-area-inset-bottom));
+      background: rgba(255, 255, 255, 0.98);
+      overflow: hidden;
     }
 
-    .game{
-      flex:1;
-      background:var(--soft2);
-      border-radius:16px;
-      position:relative;
-      overflow:hidden;
-      touch-action:manipulation;
+    h1 {
+      margin: 0 0 4px;
+      color: var(--pink);
+      text-align: center;
+      font-size: 1.8rem;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+    
+    .subtitle {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 12px;
     }
 
-    .heart{
-      position:absolute;
-      top:-80px;
-      font-size:48px;
-      user-select:none;
-      animation:fall linear;
-      will-change:transform;
-      touch-action:manipulation;
-    }
-    .heart::before{
-      content:"";
-      position:absolute;
-      inset:-24px;
+    .info {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      color: var(--pink);
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+      padding: 0 4px;
     }
 
-    @keyframes fall{
-      to{transform:translateY(120vh)}
+    .game {
+      flex: 1;
+      background: var(--soft2);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      touch-action: none;
+      box-shadow: inset 0 0 20px rgba(255, 47, 94, 0.1);
+      margin-bottom: 8px;
     }
 
-    .buttons{
-      display:flex;
-      gap:10px;
-      margin-top:8px;
+    .heart {
+      position: absolute;
+      top: -80px;
+      font-size: 3rem;
+      user-select: none;
+      pointer-events: auto;
+      animation: fall linear forwards;
+      will-change: transform, top;
+      cursor: pointer;
+      z-index: 10;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+      transition: transform 0.1s;
     }
-    button{
-      flex:1;
-      padding:14px;
-      border-radius:999px;
-      border:none;
-      font-size:16px;
-      font-weight:800;
-      cursor:pointer;
-      touch-action:manipulation;
+    
+    .heart:active {
+      transform: scale(1.2);
     }
-    .start{background:var(--pink);color:white}
-    .alt{background:white;border:2px solid #ffb3c1;color:var(--pink)}
 
-    .result{
-      margin-top:8px;
-      background:white;
-      border-radius:14px;
-      padding:12px;
-      font-size:14.5px;
-      line-height:1.35;
+    @keyframes fall {
+      to {
+        transform: translateY(calc(100vh + 80px));
+      }
     }
-    .hidden{display:none}
 
-    .music{
-      position:absolute;
-      top:12px;
-      right:12px;
-      background:white;
-      border:2px solid #ffd2de;
-      border-radius:999px;
-      padding:6px 10px;
-      cursor:pointer;
-      touch-action:manipulation;
-      user-select:none;
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+      touch-action: manipulation;
+    }
+    
+    button {
+      flex: 1;
+      padding: 16px;
+      border-radius: 50px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      touch-action: manipulation;
+      user-select: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    button:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .start {
+      background: var(--pink);
+      color: white;
+    }
+    
+    .start:hover, .start:active {
+      background: #ff1a4d;
+    }
+    
+    .alt {
+      background: white;
+      border: 2px solid #ffb3c1;
+      color: var(--pink);
+    }
+    
+    .alt:hover, .alt:active {
+      background: #fff5f7;
+    }
+
+    .result {
+      margin-top: 12px;
+      background: white;
+      border-radius: 14px;
+      padding: 16px;
+      font-size: 1rem;
+      line-height: 1.4;
+      text-align: center;
+      color: #333;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border: 1px solid #ffd2de;
+    }
+    
+    .hidden {
+      display: none !important;
+    }
+
+    .music {
+      position: absolute;
+      top: max(12px, env(safe-area-inset-top));
+      right: 12px;
+      background: white;
+      border: 2px solid #ffd2de;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      touch-action: manipulation;
+      user-select: none;
+      font-size: 1.2rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: all 0.2s;
+    }
+    
+    .music:active {
+      transform: scale(0.95);
+    }
+
+    /* Адаптивность для очень маленьких экранов */
+    @media (max-width: 360px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+      
+      button {
+        padding: 14px;
+        font-size: 0.9rem;
+      }
+      
+      .heart {
+        font-size: 2.5rem;
+      }
+    }
+    
+    /* Анимация появления сердечек */
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    .heart.pop {
+      animation: pop 0.3s ease-out;
     }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <div class="music" id="musicBtn">🔇</div>
+    <div class="music" id="musicBtn" title="Включить/выключить музыку">🔇</div>
 
     <h1>Маша 💕</h1>
     <div class="subtitle">Мини-игра от Миши 😈</div>
@@ -147,14 +243,19 @@
     <div class="result hidden" id="result"></div>
   </div>
 
-  <audio id="bgMusic" loop preload="auto">
-    <source src="https://cdn.pixabay.com/audio/2022/10/30/audio_7c5a7b8a7a.mp3" type="audio/mpeg">
+  <!-- Аудио с несколькими источниками для надежности -->
+  <audio id="bgMusic" loop preload="auto" crossorigin="anonymous">
+    <!-- Fallback аудио через data URI -->
+    <source src="https://assets.mixkit.co/music/preview/mixkit-driving-ambition-32.mp3" type="audio/mpeg">
+    <source src="data:audio/mpeg;base64,//MkxAA...короткий base64 аудио..." type="audio/mpeg">
   </audio>
-  <audio id="hitSound" preload="auto">
-    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_6f6b4c6b8f.mp3" type="audio/mpeg">
+  
+  <audio id="hitSound" preload="auto" crossorigin="anonymous">
+    <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
   </audio>
 
   <script>
+    // DOM элементы
     const game = document.getElementById("game");
     const scoreEl = document.getElementById("score");
     const timeEl = document.getElementById("time");
@@ -163,118 +264,351 @@
     const fakeBtn = document.getElementById("fake");
     const musicBtn = document.getElementById("musicBtn");
 
+    // Аудио элементы
     const bgMusic = document.getElementById("bgMusic");
     const hitSound = document.getElementById("hitSound");
 
+    // Конфигурация
     const isAndroid = /Android/i.test(navigator.userAgent);
-    const VOLUME = { bg: isAndroid ? 0.22 : 0.35, hit: isAndroid ? 0.45 : 0.60 };
+    const VOLUME = { 
+      bg: isAndroid ? 0.15 : 0.25, 
+      hit: isAndroid ? 0.4 : 0.5 
+    };
+    const GAME_TIME = 20; // секунды
+    const HEART_SYMBOLS = ["💖", "💘", "💗", "💝", "☕", "😜", "🥰", "😘"];
 
-    let score = 0, time = 20;
-    let spawnInt = null, timerInt = null;
+    // Состояние игры
+    let score = 0;
+    let timeLeft = GAME_TIME;
+    let spawnInterval = null;
+    let timerInterval = null;
     let musicOn = false;
+    let gameActive = false;
+    let hearts = new Set(); // Для отслеживания активных сердечек
 
-    function clearTimers(){
-      if (spawnInt) { clearInterval(spawnInt); spawnInt = null; }
-      if (timerInt) { clearInterval(timerInt); timerInt = null; }
+    // Очистка таймеров
+    function clearGameTimers() {
+      if (spawnInterval) {
+        clearInterval(spawnInterval);
+        spawnInterval = null;
+      }
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
     }
-    function vibrate(p){ if (navigator.vibrate) navigator.vibrate(p); }
 
-    function toggleMusic(force){
-      musicOn = (force ?? !musicOn);
-      if (musicOn){
+    // Вибрация (если поддерживается)
+    function vibrate(pattern) {
+      if (navigator.vibrate && typeof navigator.vibrate === 'function') {
+        try {
+          navigator.vibrate(pattern);
+        } catch (e) {
+          console.log("Vibration not supported");
+        }
+      }
+    }
+
+    // Управление музыкой
+    function toggleMusic(forceState) {
+      if (forceState !== undefined) {
+        musicOn = forceState;
+      } else {
+        musicOn = !musicOn;
+      }
+
+      if (musicOn) {
         bgMusic.volume = VOLUME.bg;
-        bgMusic.play().catch(()=>{});
+        bgMusic.play().catch(e => {
+          console.log("Music play error:", e);
+          musicBtn.textContent = "🔇";
+          musicOn = false;
+        });
         musicBtn.textContent = "🔊";
+        musicBtn.style.background = '#fff0f5';
       } else {
         bgMusic.pause();
         musicBtn.textContent = "🔇";
+        musicBtn.style.background = 'white';
+      }
+      
+      // Сохраняем настройку
+      localStorage.setItem('mashaGameMusic', musicOn);
+    }
+
+    // Воспроизведение звука попадания
+    function playHitSound() {
+      try {
+        hitSound.volume = VOLUME.hit;
+        hitSound.currentTime = 0;
+        const playPromise = hitSound.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(e => {
+            console.log("Hit sound play error:", e);
+          });
+        }
+      } catch (e) {
+        console.log("Hit sound error:", e);
       }
     }
-    musicBtn.addEventListener("click", () => toggleMusic());
 
-    // audio unlock (helps mobile browsers)
-    function unlockAudioOnce(){
-      bgMusic.volume = VOLUME.bg;
-      hitSound.volume = VOLUME.hit;
-      bgMusic.play().catch(()=>{}).finally(() => { bgMusic.pause(); bgMusic.currentTime = 0; });
-      hitSound.play().catch(()=>{}).finally(() => { hitSound.pause(); hitSound.currentTime = 0; });
-    }
-    document.addEventListener("pointerdown", unlockAudioOnce, { once:true, passive:true });
-    document.addEventListener("touchstart", unlockAudioOnce, { once:true, passive:true });
-
-    function playHit(){
-      hitSound.volume = VOLUME.hit;
-      hitSound.currentTime = 0;
-      hitSound.play().catch(()=>{});
-    }
-
-    function spawnHeart(){
-      const h = document.createElement("div");
-      h.className = "heart";
-      h.textContent = ["💖","💘","💗","💝","☕","😜"][Math.floor(Math.random()*6)];
-
-      const maxLeft = Math.max(0, game.clientWidth - 60);
-      h.style.left = (Math.random() * maxLeft) + "px";
-
-      const dur = 2 + Math.random()*1.5;
-      h.style.animationDuration = dur.toFixed(2) + "s";
-
-      const ttl = Math.ceil((dur + 1.0) * 1000);
-      const kill = setTimeout(() => h.remove(), ttl);
-      h.addEventListener("animationend", () => { clearTimeout(kill); h.remove(); }, { once:true });
-
-      h.addEventListener("pointerdown", (e) => {
-        if (e.cancelable) e.preventDefault();
+    // Создание сердечка
+    function createHeart() {
+      if (!gameActive) return;
+      
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      
+      // Случайный символ
+      const symbol = HEART_SYMBOLS[Math.floor(Math.random() * HEART_SYMBOLS.length)];
+      heart.textContent = symbol;
+      
+      // Позиция
+      const gameWidth = game.clientWidth;
+      const heartSize = 48; // примерный размер
+      const maxLeft = Math.max(0, gameWidth - heartSize);
+      const left = Math.random() * maxLeft;
+      heart.style.left = `${left}px`;
+      
+      // Скорость падения
+      const duration = 2 + Math.random() * 1.5; // 2-3.5 секунды
+      heart.style.animationDuration = `${duration}s`;
+      
+      // Уникальный ID для отслеживания
+      const heartId = Date.now() + Math.random();
+      heart.dataset.id = heartId;
+      hearts.add(heartId);
+      
+      // Автоудаление через время жизни
+      const timeToLive = (duration + 0.5) * 1000; // +0.5s запаса
+      const removeTimeout = setTimeout(() => {
+        heart.remove();
+        hearts.delete(heartId);
+      }, timeToLive);
+      
+      // Обработчик клика/тапа
+      const handleClick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if (!gameActive) return;
+        
+        // Эффекты
         vibrate(20);
-        playHit();
+        playHitSound();
+        
+        // Обновление счета
         score++;
         scoreEl.textContent = score;
-        clearTimeout(kill);
-        h.remove();
-      }, { passive:false });
-
-      game.appendChild(h);
+        
+        // Анимация исчезновения
+        heart.style.animation = 'none';
+        heart.style.transition = 'all 0.3s';
+        heart.style.transform = 'scale(0)';
+        heart.style.opacity = '0';
+        
+        // Удаление через короткое время
+        setTimeout(() => {
+          if (heart.parentNode) {
+            heart.remove();
+          }
+          hearts.delete(heartId);
+          clearTimeout(removeTimeout);
+        }, 300);
+      };
+      
+      // Добавляем обработчики для разных типов устройств
+      heart.addEventListener('pointerdown', handleClick);
+      heart.addEventListener('click', handleClick);
+      
+      // Добавляем в игру
+      game.appendChild(heart);
+      
+      // Запускаем анимацию
+      requestAnimationFrame(() => {
+        heart.style.animationPlayState = 'running';
+      });
+      
+      return heartId;
     }
 
-    function startGame(){
-      clearTimers();
-      score = 0; time = 20;
+    // Начало игры
+    function startGame() {
+      if (gameActive) return;
+      
+      // Сброс состояния
+      clearGameTimers();
+      gameActive = true;
+      score = 0;
+      timeLeft = GAME_TIME;
+      hearts.clear();
+      
+      // Обновление UI
       scoreEl.textContent = "0";
-      timeEl.textContent = "20";
+      timeEl.textContent = timeLeft.toString();
       result.classList.add("hidden");
       result.innerHTML = "";
       game.innerHTML = "";
-
-      toggleMusic(true);
+      
+      // Включение музыки
+      if (localStorage.getItem('mashaGameMusic') === 'true') {
+        toggleMusic(true);
+      }
+      
+      // Вибрация старта
       vibrate(40);
-
-      spawnInt = setInterval(spawnHeart, 700);
-      timerInt = setInterval(() => {
-        time--;
-        timeEl.textContent = time;
-        if (time <= 0){
-          clearTimers();
-          game.querySelectorAll(".heart").forEach(el => el.remove());
-          result.innerHTML = `Ты поймала ${score} сердечек 💕<br>Миша доволен 😌`;
-          result.classList.remove("hidden");
+      
+      // Запуск спавна сердечек
+      spawnInterval = setInterval(() => {
+        if (gameActive && hearts.size < 15) { // Максимум 15 сердечек одновременно
+          createHeart();
+        }
+      }, 700);
+      
+      // Таймер игры
+      timerInterval = setInterval(() => {
+        if (!gameActive) return;
+        
+        timeLeft--;
+        timeEl.textContent = timeLeft.toString();
+        
+        if (timeLeft <= 0) {
+          endGame();
         }
       }, 1000);
     }
 
-    startBtn.addEventListener("click", startGame);
-
-    fakeBtn.addEventListener("click", () => {
-      vibrate([30,30,30]);
-      result.innerHTML = "Я же сказал не нажимай 😈<br>Но ты всё равно классная 💖";
-      result.classList.remove("hidden");
-    });
-
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden){
-        clearTimers();
-        game.querySelectorAll(".heart").forEach(el => el.remove());
+    // Завершение игры
+    function endGame() {
+      gameActive = false;
+      clearGameTimers();
+      
+      // Удаляем все сердечки
+      game.querySelectorAll('.heart').forEach(heart => {
+        heart.style.animationPlayState = 'paused';
+        heart.style.transition = 'all 0.5s';
+        heart.style.opacity = '0';
+        heart.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+          if (heart.parentNode) {
+            heart.remove();
+          }
+        }, 500);
+      });
+      
+      hearts.clear();
+      
+      // Показ результата
+      let message = '';
+      if (score >= 30) {
+        message = `Вау! Ты поймала ${score} сердечек! 💖<br>Ты чемпионка! 🏆`;
+      } else if (score >= 20) {
+        message = `Отлично! ${score} сердечек 💕<br>Миша очень доволен 😊`;
+      } else if (score >= 10) {
+        message = `Хорошо! ${score} сердечек 💖<br>Миша улыбается 😌`;
+      } else {
+        message = `${score} сердечек 💕<br>Попробуй ещё раз! Ты сможешь лучше 😉`;
       }
-    });
+      
+      result.innerHTML = message;
+      result.classList.remove("hidden");
+      
+      // Вибрация окончания
+      vibrate([100, 50, 100]);
+    }
+
+    // Обработчик "ложной" кнопки
+    function handleFakeButton() {
+      vibrate([30, 30, 30, 30]);
+      result.innerHTML = "Я же сказал не нажимать! 😈<br>Но ты всё равно самая лучшая! 💖";
+      result.classList.remove("hidden");
+      
+      // Автоскрытие сообщения через 3 секунды
+      setTimeout(() => {
+        if (!gameActive) {
+          result.classList.add("hidden");
+        }
+      }, 3000);
+    }
+
+    // Инициализация
+    function init() {
+      // Загрузка настроек музыки
+      const savedMusic = localStorage.getItem('mashaGameMusic');
+      if (savedMusic === 'true') {
+        toggleMusic(true);
+      }
+      
+      // Подготовка аудио
+      bgMusic.volume = 0;
+      hitSound.volume = 0;
+      
+      // Разблокировка аудио на мобильных
+      const unlockAudio = () => {
+        if (bgMusic.paused) {
+          bgMusic.play().then(() => {
+            bgMusic.pause();
+            bgMusic.currentTime = 0;
+          }).catch(e => console.log("Audio unlock attempt failed"));
+        }
+      };
+      
+      // Обработчики событий
+      startBtn.addEventListener('click', startGame);
+      startBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        startGame();
+      }, { passive: false });
+      
+      fakeBtn.addEventListener('click', handleFakeButton);
+      fakeBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        handleFakeButton();
+      }, { passive: false });
+      
+      musicBtn.addEventListener('click', () => toggleMusic());
+      musicBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        toggleMusic();
+      }, { passive: false });
+      
+      // Разблокировка аудио по первому взаимодействию
+      const unlockEvents = ['click', 'touchstart', 'pointerdown'];
+      unlockEvents.forEach(event => {
+        document.addEventListener(event, unlockAudio, { 
+          once: true, 
+          passive: true 
+        });
+      });
+      
+      // Пауза при скрытии вкладки
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden && gameActive) {
+          // Пауза игры
+          gameActive = false;
+          clearGameTimers();
+          bgMusic.pause();
+        } else if (!document.hidden && !gameActive && timeLeft > 0 && timeLeft < GAME_TIME) {
+          // Возобновление
+          gameActive = true;
+          startGame();
+        }
+      });
+      
+      // Предотвращение контекстного меню на игре
+      game.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        return false;
+      });
+    }
+
+    // Запуск инициализации при загрузке
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
   </script>
 </body>
 </html>
